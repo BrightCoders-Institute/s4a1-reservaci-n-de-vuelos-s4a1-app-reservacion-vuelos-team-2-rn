@@ -5,10 +5,12 @@ interface Props {
   text: string;
   type: string | any;
   invisible?: boolean;
+  value: string;
+  onChangeText: (text: string) => void;
 }
 
 const InputField = (props: Props) => {
-  const {text, type, invisible} = props;
+  const {text, type, value, onChangeText, invisible} = props;
 
   const [isFocus, setIsFocus] = useState(false);
 
@@ -29,6 +31,8 @@ const InputField = (props: Props) => {
         secureTextEntry={invisible}
         onFocus={onFocus}
         onBlur={onBlur}
+        value={value}
+        onChangeText={onChangeText}
       />
     </View>
   );

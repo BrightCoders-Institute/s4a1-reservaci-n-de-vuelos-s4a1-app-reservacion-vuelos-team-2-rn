@@ -8,13 +8,40 @@ import {
 
 interface ButtonProps {
   title: string;
+  enable: boolean;
   onPress: (event: GestureResponderEvent) => void;
+  processNum: any;
 }
 
-const Button: React.FC<ButtonProps> = ({title, onPress}) => {
+const Button: React.FC<ButtonProps> = ({
+  title,
+  enable,
+  onPress,
+  processNum,
+}) => {
+  const style = enable
+    ? {button: styles.button, text: styles.text}
+    : {button: styles.button__disabled, text: styles.text__disabled};
+
+  const process1 = () => {
+    console.log('Process 1');
+  };
+
+  const process2 = () => {
+    console.log('Process 2');
+  };
+
+  const process: any = {
+    1: process1,
+    2: process2,
+  };
+
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={styles.text}>{title}</Text>
+    <TouchableOpacity
+      style={style.button}
+      onPress={process[processNum]}
+      disabled={!enable}>
+      <Text style={style.text}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -27,6 +54,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  button__disabled: {
+    backgroundColor: 'gray',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  text__disabled: {
     color: '#fff',
     fontSize: 16,
   },

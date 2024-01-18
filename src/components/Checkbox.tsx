@@ -2,22 +2,28 @@ import React, {useState} from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 
-const CheckBoxComponent = () => {
-  const [isSelected, setSelection] = useState(false);
+interface Props {
+  state: boolean;
+  setState: React.Dispatch<React.SetStateAction<boolean>>;
+  textCheckbox: string;
+}
+
+const CheckBoxComponent = (props: Props) => {
+  const {state, setState, textCheckbox} = props;
 
   return (
     // <View style={styles.container}>
     <View>
       {/* <View style={styles.checkboxContainer}> */}
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <Text>?????</Text>
         <CheckBox
-          value={isSelected}
-          onValueChange={setSelection}
+          value={state}
+          onValueChange={setState}
           //   style={styles.checkbox}
         />
+        <Text>{textCheckbox}</Text>
       </View>
-      <Text>Is CheckBox selected: {isSelected ? 'si' : 'no'}</Text>
+      {/* <Text>Is CheckBox selected: {state ? 'si' : 'no'}</Text> */}
     </View>
   );
 };
