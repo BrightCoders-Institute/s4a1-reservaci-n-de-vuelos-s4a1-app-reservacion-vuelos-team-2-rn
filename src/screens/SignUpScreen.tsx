@@ -1,20 +1,32 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Alert} from 'react-native';
 import InputField from '../components/InputField';
 import CheckBox from '../components/Checkbox';
 import Button from '../components/Button';
+import auth from '@react-native-firebase/auth'
 
 
 const SignUp = () => {
   const [checkboxTerms, setCheckboxTerms] = useState(false);
   const [checkboxSubs, setCheckboxSubs] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
+  const SignUpTest = () =>{
+    auth().createUserWithEmailAndPassword(email,password).then(()=>{
+      Alert.alert("Usuario Creado!")
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
+  
   return (
     <View style={{flex: 1, margin: 22}}>
       <Text style={styles.textTitle}>Sign Up</Text>
       <InputField text={'First name'} type="text" />
-      <InputField text={'Email'} type="email" />
-      <InputField text={'Password *'} type="text" invisible={true} />
+      <InputField text={'Email'} type="email" onChangeText={(text) => setEmail(text)}/>
+      <InputField text={'Password *'} type="text" invisible={true}  onChangeText={(text) => setPassword(text)} />
       <View>
         <CheckBox
           state={checkboxTerms}
@@ -26,7 +38,7 @@ const SignUp = () => {
           setState={setCheckboxSubs}
           textCheckbox={'Subscribe for select product updates.'}
         />
-        <Button title="Sign Up" enable={checkboxTerms} processNum={1} />
+        <Button title="Sign Up" enable={checkboxTerms} onPress={SignUpTest}/>
         <Text style={{textAlign:'center'}}>or</Text>
         <Button title="Sign Up with Google" enable={true} processNum={2} />
       </View>

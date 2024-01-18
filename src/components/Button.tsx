@@ -4,7 +4,10 @@ import {
   Text,
   StyleSheet,
   GestureResponderEvent,
+  Alert,
 } from 'react-native';
+
+
 
 interface ButtonProps {
   title: string;
@@ -20,9 +23,10 @@ const Button: React.FC<ButtonProps> = ({
   processNum,
 }) => {
   const style = enable
+  
     ? {button: styles.button, text: styles.text}
     : {button: styles.button__disabled, text: styles.text__disabled};
-
+    
   const process1 = () => {
     console.log('Process 1');
   };
@@ -39,7 +43,8 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <TouchableOpacity
       style={style.button}
-      onPress={process[processNum]}
+      // onPress={process[processNum]}
+      onPress={onPress}
       disabled={!enable}>
       <Text style={style.text}>{title}</Text>
     </TouchableOpacity>
