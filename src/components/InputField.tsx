@@ -3,14 +3,14 @@ import {View, Text, TextInput, StyleSheet} from 'react-native';
 
 interface Props {
   text: string;
+  reason: string;
   type: string | any;
   invisible?: boolean;
-  value: string;
-  onChangeText: (text: string) => void;
+  onChangeText?: (text: string) => void;
 }
 
 const InputField = (props: Props) => {
-  const {text, type, value, onChangeText, invisible} = props;
+  const {text, type, onChangeText, invisible, reason} = props;
 
   const [isFocus, setIsFocus] = useState(false);
 
@@ -24,14 +24,15 @@ const InputField = (props: Props) => {
 
   return (
     <View>
-      <Text>{text}</Text>
+      <Text>
+        {text} <Text style={styles.span}>{reason}</Text>
+      </Text>
       <TextInput
         style={isFocus ? styles.inputField__Focus : styles.inputField}
-        inputMode={type}
-        secureTextEntry={invisible}
         onFocus={onFocus}
         onBlur={onBlur}
-        value={value}
+        inputMode={type}
+        secureTextEntry={invisible}
         onChangeText={onChangeText}
       />
     </View>
@@ -47,6 +48,9 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: 'black',
   },
+  span: {
+    color: 'red',
+  }
 });
 
 export default InputField;

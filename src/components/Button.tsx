@@ -12,15 +12,13 @@ import {
 interface ButtonProps {
   title: string;
   enable: boolean;
-  onPress: (event: GestureResponderEvent) => void;
-  processNum: any;
+  onPress?: (event: GestureResponderEvent) => void;
 }
 
 const Button: React.FC<ButtonProps> = ({
   title,
   enable,
   onPress,
-  processNum,
 }) => {
   const style = enable
   
@@ -33,11 +31,6 @@ const Button: React.FC<ButtonProps> = ({
 
   const process2 = () => {
     console.log('Process 2');
-  };
-
-  const process: any = {
-    1: process1,
-    2: process2,
   };
 
   return (
