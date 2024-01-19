@@ -46,5 +46,5 @@ const HomePageScreen = ({ navigation }) => {
       </View>
     );
   }
-
+  
   export default HomePageScreen;

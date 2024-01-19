@@ -26,11 +26,8 @@ const SignUp = ({navigation}) => {
       .createUserWithEmailAndPassword( email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        // Alert.alert("Usuario Creado! " + email)
-        // console.log(user)
       })
       .then((userCredential) => {
-        // navigation.navigate('HomePageScreen');
         navigation.push("HomePage")
     })
     .catch((error)=>{
@@ -41,8 +38,6 @@ const SignUp = ({navigation}) => {
       if (error.code === 'auth/invalid-email') {
         emailInvalid('That email address is invalid!');
       }
-  
-      //console.error(error);
     })
   }
 
