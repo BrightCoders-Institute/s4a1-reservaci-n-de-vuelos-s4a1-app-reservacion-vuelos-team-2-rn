@@ -36,7 +36,7 @@ const HomePageScreen = ({ navigation }) => {
   
     const handleLogOut = () => {
       logOff();
-      navigation.navigate('SignUpScreen');
+      navigation.push("SignUp")
     };
   
     return (
