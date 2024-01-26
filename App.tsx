@@ -16,12 +16,6 @@ import HomePageScreen from './src/screens/HomePageScreen';
 const Stack = createNativeStackNavigator();
 
 function App(): React.JSX.Element {
-  // const isDarkMode = useColorScheme() === 'dark';
-
-  // const backgroundStyle = {
-  //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  // };
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SignUp">

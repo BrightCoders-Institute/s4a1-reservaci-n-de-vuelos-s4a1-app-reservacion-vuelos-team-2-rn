@@ -32,7 +32,6 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <TouchableOpacity
       style={style.button}
-      // onPress={process[processNum]}
       onPress={onPress}
       disabled={!enable}>
       <Text style={style.text}>{title}</Text>

@@ -14,11 +14,13 @@ const CheckBoxComponent = (props: Props) => {
   return (
     <View>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <CheckBox value={state} onValueChange={setState} />
+        <CheckBox
+          value={state}
+          onValueChange={setState}
+        />
         <Text>{textCheckbox}</Text>
       </View>
     </View>
   );
 };
-
 export default CheckBoxComponent;

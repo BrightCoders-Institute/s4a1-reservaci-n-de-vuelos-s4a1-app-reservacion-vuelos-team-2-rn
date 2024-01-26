@@ -52,29 +52,24 @@ const SignUp = ({navigation}) => {
     return auth().signInWithCredential(googleCredential);
   }
 
-  const signUp = async () => {
-    setLoading(true);
-    try {
-      const response = await auth().createUserWithEmailAndPassword(
-        email,
-        password,
-      );
-      console.log(response);
-      navigation.push('HomePage');
-    } catch (error) {
-      console.log(error);
-      const reason = transformError(error);
+  const SignUpTest = () => {
+    auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+      })
+      .then((userCredential) => {
+        navigation.push("HomePage");
+      })
+      .catch((error)=>{
+        if (error.code === 'auth/email-already-in-use') {
+          emailInvalid('That email address is already in use!');
+        }
 
-      if (reason.includes('email')) {
-        emailInvalid(reason);
-        setPwdValid('');
-      } else if (reason.includes('password')) {
-        pwdInvalid(reason);
-        setEmailValid('');
-      }
-    } finally {
-      setLoading(false);
-    }
+        if (error.code === 'auth/invalid-email') {
+          emailInvalid('That email address is invalid!');
+        }
+      });
   };
 
   return (
@@ -117,7 +112,7 @@ const SignUp = ({navigation}) => {
         <Button
           title="Sign Up"
           enable={checkboxTerms && email.length > 0 && password.length > 0}
-          onPress={signUp}
+          onPress={SignUpTest}
         />
         <Text style={{textAlign: 'center'}}>or</Text>
         <Button
