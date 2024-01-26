@@ -10,7 +10,9 @@ const HomePageScreen = ({navigation}) => {
   // Handle user state changes
   function onAuthStateChanged(user) {
     setUser(user);
-    if (initializing) setInitializing(false);
+    if (initializing) {
+      setInitializing(false);
+    }
   }
 
   useEffect(() => {
@@ -18,7 +20,9 @@ const HomePageScreen = ({navigation}) => {
     return subscriber;
   }, []);
 
-  if (initializing) return null;
+  if (initializing) {
+    return null;
+  }
 
   if (!user) {
     return (
@@ -36,7 +40,7 @@ const HomePageScreen = ({navigation}) => {
 
   const handleLogOut = () => {
     logOff();
-    navigation.navigate('SignUpScreen');
+    navigation.push('SignUp');
   };
 
   return (
