@@ -3,7 +3,7 @@ import {View, Text, TextInput, StyleSheet} from 'react-native';
 
 interface Props {
   text: string;
-  reason: string;
+  reason: string | boolean;
   type: string | any;
   invisible?: boolean;
   onChangeText?: (text: string) => void;
