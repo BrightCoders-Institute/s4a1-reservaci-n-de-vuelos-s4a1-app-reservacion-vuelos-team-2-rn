@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
 import InputField from '../components/InputField';
 import CheckBox from '../components/Checkbox';
 import Button from '../components/Button';
 import auth from '@react-native-firebase/auth';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const SignUp = ({navigation}) => {
   const [checkboxTerms, setCheckboxTerms] = useState(false);
   const [checkboxSubs, setCheckboxSubs] = useState(false);
-
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,6 +30,27 @@ const SignUp = ({navigation}) => {
 
     return err.slice(err.indexOf(']') + 2, err.length + 1);
   };
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: "644313173315-llsu6r28k9sq1fgv1h0801fc1tnmrp4v.apps.googleusercontent.com",
+    });
+  }, []);
+
+  async function onGoogleButtonPress() {
+    // Check if your device supports Google Play
+    await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+    // Get the users ID token
+    const {idToken} = await GoogleSignin.signIn();
+    console.log(idToken);
+    navigation.push('HomePage');
+
+    // Create a Google credential with the token
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+    // Sign-in the user with the credential
+    return auth().signInWithCredential(googleCredential);
+  }
 
   const signUp = async () => {
     setLoading(true);
@@ -99,7 +120,11 @@ const SignUp = ({navigation}) => {
           onPress={signUp}
         />
         <Text style={{textAlign: 'center'}}>or</Text>
-        <Button title="Sign Up with Google" enable={true} />
+        <Button
+          title="Sign Up with Google"
+          enable={true}
+          onPress={onGoogleButtonPress}
+        />
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
           <Text>Already have an account?</Text>
           <TouchableOpacity onPress={() => navigation.push('HomePage')}>
