@@ -6,8 +6,7 @@
  */
 
 import React from 'react';
-import {View, Text} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 //import { StackNavigator } from './src/navigator/StackNavigator';
 
@@ -26,7 +25,7 @@ function App(): React.JSX.Element {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SignUp">
-        <Stack.Screen name="SignUp" >
+        <Stack.Screen name="SignUp">
           {props => <SignUp {...props} />}
         </Stack.Screen>
         <Stack.Screen name="HomePage" component={HomePageScreen} />

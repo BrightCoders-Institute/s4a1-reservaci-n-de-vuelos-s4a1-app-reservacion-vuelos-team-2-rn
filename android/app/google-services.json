@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "1090818629655",
-    "project_id": "reservacion-de-vuelo",
-    "storage_bucket": "reservacion-de-vuelo.appspot.com"
+    "project_number": "644313173315",
+    "project_id": "vuelo-app-9c3ca",
+    "storage_bucket": "vuelo-app-9c3ca.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1090818629655:android:047c42e657ac0ffc397c52",
+        "mobilesdk_app_id": "1:644313173315:android:bb7cea385e98f74c2db3f6",
         "android_client_info": {
-          "package_name": "com.reservaciondevuelos"
+          "package_name": "com.vuelosreserv"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDq1WXghXkYXKBTRr6StQpsD2S_EAMXJvE"
+          "current_key": "AIzaSyClJbXDJB9IxQIO1YF6Rax5c3rYA2YMZGA"
         }
       ],
       "services": {

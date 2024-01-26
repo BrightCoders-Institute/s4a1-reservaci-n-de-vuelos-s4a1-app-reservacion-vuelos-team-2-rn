@@ -1,4 +1,4 @@
-package com.reservaciondevuelos
+package com.vuelosreserv
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
