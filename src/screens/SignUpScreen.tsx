@@ -1,9 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, Alert, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import InputField from '../components/InputField';
 import CheckBox from '../components/Checkbox';
 import Button from '../components/Button';
 import auth from '@react-native-firebase/auth';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const SignUp = ({navigation}: {navigation: any}) => {
   const [checkboxTerms, setCheckboxTerms] = useState(false);
@@ -17,15 +24,37 @@ const SignUp = ({navigation}: {navigation: any}) => {
   const [passwordValid, setPasswordValid] = useState('');
   const [nameValid, setNameValid] = useState<string | boolean>('');
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  const passwordRegex =
+    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   const nameRegex = /^[a-zA-Z]+$/;
 
   const [loading, setLoading] = useState(false);
 
-
   const emailInvalid = (reason: string) => {
     setEmailValid(reason);
   };
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '644313173315-llsu6r28k9sq1fgv1h0801fc1tnmrp4v.apps.googleusercontent.com',
+    });
+  }, []);
+
+  async function onGoogleButtonPress() {
+    // Check if your device supports Google Play
+    await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+    // Get the users ID token
+    const {idToken} = await GoogleSignin.signIn();
+    console.log(idToken);
+    navigation.push('HomePage');
+
+    // Create a Google credential with the token
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+    // Sign-in the user with the credential
+    return auth().signInWithCredential(googleCredential);
+  }
 
   const passwordInvalid = () => {
     setPasswordValid('Incorrect email and/or password');
@@ -33,25 +62,30 @@ const SignUp = ({navigation}: {navigation: any}) => {
 
   const nameInvalid = (state: boolean | string) => {
     if (state) {
-      setNameValid('Invalid name, only text')
+      setNameValid('Invalid name, only text');
     } else {
-      setNameValid('')
+      setNameValid('');
     }
   };
 
   const isEmpty = () => {
-    return (checkboxTerms && name.length > 0 && password.length > 0 && email.length > 0);
+    return (
+      checkboxTerms &&
+      name.length > 0 &&
+      password.length > 0 &&
+      email.length > 0
+    );
   };
 
-  const SignUpTest = () =>{
+  const SignUpTest = () => {
     if (!nameRegex.test(name)) {
       nameInvalid(true);
       return;
-    } else if ((!passwordRegex.test(password)) || (!emailRegex.test(email))){
+    } else if (!passwordRegex.test(password) || !emailRegex.test(email)) {
       nameInvalid(false);
       passwordInvalid();
       return;
-    } 
+    }
     setLoading(true);
 
     auth()
@@ -61,20 +95,19 @@ const SignUp = ({navigation}: {navigation: any}) => {
       })
       .then((userCredential) => {
         navigation.push("HomePage");
-    })
-    .catch((error)=>{
-      console.log(error);
-      if (error.code === 'auth/email-already-in-use') {
-        emailInvalid('That email address is already in use!');
-      }
-      
-      if (error.code === 'auth/invalid-email') {
-        passwordInvalid();
-      }
-    })
-    .finally(() => {
-      setLoading(false);
-    })
+      })
+      .catch((error)=>{
+        console.log(error);
+        if (error.code === 'auth/email-already-in-use') {
+          emailInvalid('That email address is already in use!');
+        }
+        if (error.code === 'auth/invalid-email') {
+          passwordInvalid();
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      })
   };
 
   return (
@@ -83,30 +116,31 @@ const SignUp = ({navigation}: {navigation: any}) => {
       <InputField
         text={'First name'}
         type="text"
-        onChangeText={(text) => setName(text)}
+        onChangeText={text => setName(text)}
         invisible={false}
         reason={nameValid}
       />
       <InputField
         text={'Email *'}
         type="email"
-        onChangeText={(text) => setEmail(text)}
+        onChangeText={text => setEmail(text)}
         invisible={false}
         reason={emailValid}
       />
       <InputField
         text={'Password *'}
         type="text"
-        onChangeText={(text) => setPassword(text)}
+        onChangeText={text => setPassword(text)}
         invisible={true}
         reason={passwordValid}
       />
-      {
-        (passwordValid == '') ? '' : 
-          <Text style={styles.textInvalidPass}>
-            {'Use 8 or more characters with a mix of letters, numbers, and symbols.'}
-          </Text>
-      }
+      {passwordValid === '' ? (
+        ''
+      ) : (
+        <Text style={styles.textInvalidPass}>
+          Use 8 or more characters with a mix of letters, numbers, and symbols.
+        </Text>
+      )}
       <CheckBox
         state={checkboxTerms}
         setState={setCheckboxTerms}
@@ -120,17 +154,17 @@ const SignUp = ({navigation}: {navigation: any}) => {
       {loading ? <ActivityIndicator size="large" color="0000ff" /> : false}
       {/* Posible componente reutilizable */}
       <View>
-        <Button title="Sign Up" enable={isEmpty()} onPress={SignUpTest}/>
-        <Text style={{textAlign:'center'}}>or</Text>
-        <Button title="Sign Up with Google" enable={true} />
+        <Button title="Sign Up" enable={isEmpty()} onPress={SignUpTest} />
+        <Text style={{textAlign: 'center'}}>or</Text>
+        <Button
+          title="Sign Up with Google"
+          enable={true}
+          onPress={onGoogleButtonPress}
+        />
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-          <Text>
-            Already have an account?
-          </Text>
-          <TouchableOpacity onPress={() =>
-            navigation.push("HomePage")
-          }>
-            <Text style={{color:'blue'}}>Log In</Text>
+          <Text>Already have an account?</Text>
+          <TouchableOpacity onPress={() => navigation.push('HomePage')}>
+            <Text style={{color: 'blue'}}>Log In</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -146,8 +180,8 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   textInvalidPass: {
-    marginBottom: 20
-  }
+    marginBottom: 20,
+  },
 });
 
 export default SignUp;

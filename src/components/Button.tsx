@@ -4,7 +4,6 @@ import {
   Text,
   StyleSheet,
   GestureResponderEvent,
-  Alert,
 } from 'react-native';
 
 interface ButtonProps {

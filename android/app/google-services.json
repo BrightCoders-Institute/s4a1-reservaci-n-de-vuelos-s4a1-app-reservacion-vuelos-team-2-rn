@@ -1,26 +1,52 @@
 {
   "project_info": {
-    "project_number": "1090818629655",
-    "project_id": "reservacion-de-vuelo",
-    "storage_bucket": "reservacion-de-vuelo.appspot.com"
+    "project_number": "644313173315",
+    "project_id": "vuelo-app-9c3ca",
+    "storage_bucket": "vuelo-app-9c3ca.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1090818629655:android:047c42e657ac0ffc397c52",
+        "mobilesdk_app_id": "1:644313173315:android:bb7cea385e98f74c2db3f6",
         "android_client_info": {
-          "package_name": "com.reservaciondevuelos"
+          "package_name": "com.vuelosreserv"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "644313173315-a5qmibibhf7ot216pf1b5eem8cm238tc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vuelosreserv",
+            "certificate_hash": "f561e4d7b2512b9b02c8e8f3c057f20ec87dd363"
+          }
+        },
+        {
+          "client_id": "644313173315-gk65j0f9cna4fo9t4lqgsdkqikst2k50.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vuelosreserv",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "644313173315-llsu6r28k9sq1fgv1h0801fc1tnmrp4v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDq1WXghXkYXKBTRr6StQpsD2S_EAMXJvE"
+          "current_key": "AIzaSyClJbXDJB9IxQIO1YF6Rax5c3rYA2YMZGA"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "644313173315-llsu6r28k9sq1fgv1h0801fc1tnmrp4v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
