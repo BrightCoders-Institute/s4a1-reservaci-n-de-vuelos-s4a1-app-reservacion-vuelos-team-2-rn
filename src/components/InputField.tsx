@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   span: {
     color: 'red',
-  }
+  },
 });
 
 export default InputField;

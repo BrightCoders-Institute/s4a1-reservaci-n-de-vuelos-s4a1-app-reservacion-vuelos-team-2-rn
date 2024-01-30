@@ -2,13 +2,13 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, Button} from 'react-native';
 import auth from '@react-native-firebase/auth';
 
-const HomePageScreen = ({navigation}) => {
+const HomePageScreen = ({navigation}: {navigation: any}) => {
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
   // Handle user state changes
-  function onAuthStateChanged(user) {
+  function authStateChanged(user) {
     setUser(user);
     if (initializing) {
       setInitializing(false);
@@ -16,7 +16,7 @@ const HomePageScreen = ({navigation}) => {
   }
 
   useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    const subscriber = auth().onAuthStateChanged(authStateChanged);
     return subscriber;
   }, []);
 
@@ -27,7 +27,8 @@ const HomePageScreen = ({navigation}) => {
   if (!user) {
     return (
       <View>
-        <Text>Home Page</Text>
+        <Text>No estas logueado</Text>
+        <Button title="Sign Up" onPress={() => navigation.navigate('SignUp')} />
       </View>
     );
   }
@@ -40,7 +41,7 @@ const HomePageScreen = ({navigation}) => {
 
   const handleLogOut = () => {
     logOff();
-    navigation.push('SignUp');
+    navigation.navigate('SignUp');
   };
 
   return (
