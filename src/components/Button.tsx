@@ -12,11 +12,7 @@ interface ButtonProps {
   onPress?: (event: GestureResponderEvent) => void;
 }
 
-const Button: React.FC<ButtonProps> = ({
-  title,
-  enable,
-  onPress,
-}) => {
+const Button: React.FC<ButtonProps> = ({title, enable, onPress}) => {
   const style = enable
     ? {button: styles.button, text: styles.text}
     : {button: styles.button__disabled, text: styles.text__disabled};
@@ -30,10 +26,7 @@ const Button: React.FC<ButtonProps> = ({
   };
 
   return (
-    <TouchableOpacity
-      style={style.button}
-      onPress={onPress}
-      disabled={!enable}>
+    <TouchableOpacity style={style.button} onPress={onPress} disabled={!enable}>
       <Text style={style.text}>{title}</Text>
     </TouchableOpacity>
   );
