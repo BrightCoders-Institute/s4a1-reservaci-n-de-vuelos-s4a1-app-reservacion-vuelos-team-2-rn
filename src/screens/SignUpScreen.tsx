@@ -43,17 +43,13 @@ const SignUp = ({navigation}: {navigation: any}) => {
   }, []);
 
   async function onGoogleButtonPress() {
-    // Check if your device supports Google Play
     await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
-    // Get the users ID token
     const {idToken} = await GoogleSignin.signIn();
     console.log(idToken);
     navigation.push('HomePage');
 
-    // Create a Google credential with the token
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
-    // Sign-in the user with the credential
     return auth().signInWithCredential(googleCredential);
   }
 
@@ -91,13 +87,13 @@ const SignUp = ({navigation}: {navigation: any}) => {
 
     auth()
       .createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
+      .then(userCredential => {
         const user = userCredential.user;
       })
       .then((userCredential) => {
-        navigation.push("HomePage");
+        navigation.push('HomePage');
       })
-      .catch((error)=>{
+      .catch(error => {
         console.log(error);
         if (error.code === 'auth/email-already-in-use') {
           emailInvalid('That email address is already in use!');
@@ -108,7 +104,7 @@ const SignUp = ({navigation}: {navigation: any}) => {
       })
       .finally(() => {
         setLoading(false);
-      })
+      });
   };
 
   return (
@@ -118,21 +114,21 @@ const SignUp = ({navigation}: {navigation: any}) => {
         text={'First name'}
         type="text"
         onChangeText={text => setName(text)}
-        invisible={false}
+        secure={false}
         reason={nameValid}
       />
       <InputField
         text={'Email *'}
         type="email"
         onChangeText={text => setEmail(text)}
-        invisible={false}
+        secure={false}
         reason={emailValid}
       />
       <InputField
         text={'Password *'}
         type="text"
         onChangeText={text => setPassword(text)}
-        invisible={true}
+        secure={true}
         reason={passwordValid}
       />
       {passwordValid === '' ? (
@@ -153,7 +149,6 @@ const SignUp = ({navigation}: {navigation: any}) => {
         textCheckbox={'Subscribe for select product updates.'}
       />
       {loading ? <ActivityIndicator size="large" color="0000ff" /> : false}
-      {/* Posible componente reutilizable */}
       <View>
         <Button title="Sign Up" enable={isEmpty()} onPress={SignUpTest} />
         <Text style={{textAlign: 'center'}}>or</Text>
