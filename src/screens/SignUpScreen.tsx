@@ -90,13 +90,13 @@ const SignUp = ({navigation}: {navigation: any}) => {
 
     auth()
       .createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
+      .then(userCredential => {
         const user = userCredential.user;
       })
       .then((userCredential) => {
-        navigation.push("HomePage");
+        navigation.push('HomePage');
       })
-      .catch((error)=>{
+      .catch(error => {
         console.log(error);
         if (error.code === 'auth/email-already-in-use') {
           emailInvalid('That email address is already in use!');
@@ -107,7 +107,7 @@ const SignUp = ({navigation}: {navigation: any}) => {
       })
       .finally(() => {
         setLoading(false);
-      })
+      });
   };
 
   return (
@@ -117,21 +117,21 @@ const SignUp = ({navigation}: {navigation: any}) => {
         text={'First name'}
         type="text"
         onChangeText={text => setName(text)}
-        invisible={false}
+        secure={false}
         reason={nameValid}
       />
       <InputField
         text={'Email *'}
         type="email"
         onChangeText={text => setEmail(text)}
-        invisible={false}
+        secure={false}
         reason={emailValid}
       />
       <InputField
         text={'Password *'}
         type="text"
         onChangeText={text => setPassword(text)}
-        invisible={true}
+        secure={true}
         reason={passwordValid}
       />
       {passwordValid === '' ? (
