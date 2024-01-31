@@ -17,14 +17,6 @@ const Button: React.FC<ButtonProps> = ({title, enable, onPress}) => {
     ? {button: styles.button, text: styles.text}
     : {button: styles.button__disabled, text: styles.text__disabled};
 
-  const process1 = () => {
-    console.log('Process 1');
-  };
-
-  const process2 = () => {
-    console.log('Process 2');
-  };
-
   return (
     <TouchableOpacity style={style.button} onPress={onPress} disabled={!enable}>
       <Text style={style.text}>{title}</Text>

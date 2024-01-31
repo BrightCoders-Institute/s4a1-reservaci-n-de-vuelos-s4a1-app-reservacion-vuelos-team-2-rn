@@ -17,6 +17,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
 
   const [emailValid, setEmailValid] = useState('');
   const [passwordValid, setPasswordValid] = useState('');
+
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passwordRegex =
     /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -27,37 +28,39 @@ const SignIn = ({navigation}: {navigation: any}) => {
     setEmailValid(reason);
   };
 
+  const clearErrors = () => {
+    setEmailValid('');
+    setPasswordValid('');
+  };
+
   useEffect(() => {
     GoogleSignin.configure({
       webClientId:
         '644313173315-llsu6r28k9sq1fgv1h0801fc1tnmrp4v.apps.googleusercontent.com',
     });
+    clearErrors();
   }, []);
 
   async function onGoogleButtonPress() {
-    // Check if your device supports Google Play
     await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
-    // Get the users ID token
     const {idToken} = await GoogleSignin.signIn();
     console.log(idToken);
     navigation.push('HomePage');
 
-    // Create a Google credential with the token
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
-    // Sign-in the user with the credential
     return auth().signInWithCredential(googleCredential);
   }
 
   const passwordInvalid = () => {
-    setPasswordValid('Incorrect email and/or password');
+    setPasswordValid('Wrong password!');
   };
 
   const isEmpty = () => {
     return password.length > 0 && email.length > 0;
   };
 
-  const SignUpTest = () => {
+  const SignInTest = () => {
     if (!passwordRegex.test(password) || !emailRegex.test(email)) {
       passwordInvalid();
       return;
@@ -65,19 +68,19 @@ const SignIn = ({navigation}: {navigation: any}) => {
     setLoading(true);
 
     auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
+      .signInWithEmailAndPassword(email, password)
+      .then(userCredential => {
         const user = userCredential.user;
       })
       .then((userCredential) => {
-        navigation.push("HomePage");
+        navigation.push('HomePage');
       })
-      .catch((error) => {
-        console.log(error);
-        if (error.code === 'auth/email-already-in-use') {
-          emailInvalid('That email address is already in use!');
+      .catch(error => {
+        console.log(error.code);
+        if (error.code === 'auth/invalid-credential') {
+          emailInvalid('That email address not found!');
         }
-        if (error.code === 'auth/invalid-email') {
+        if (error.code === 'auth/wrong1-password') {
           passwordInvalid();
         }
       })
@@ -90,39 +93,31 @@ const SignIn = ({navigation}: {navigation: any}) => {
     <View style={{flex: 1, margin: 22}}>
       <Text style={styles.textTitle}>Sign In</Text>
       <InputField
-        text={'Email *'}
+        text={'Email'}
         type="email"
         onChangeText={text => setEmail(text)}
-        invisible={false}
+        secure={false}
         reason={emailValid}
       />
       <InputField
-        text={'Password *'}
+        text={'Password'}
         type="text"
         onChangeText={text => setPassword(text)}
-        invisible={true}
+        secure={true}
         reason={passwordValid}
       />
-      {passwordValid === '' ? (
-        ''
-      ) : (
-        <Text style={styles.textInvalidPass}>
-          Use 8 or more characters with a mix of letters, numbers, and symbols.
-        </Text>
-      )}
       {loading ? <ActivityIndicator size="large" color="0000ff" /> : false}
-      {/* Posible componente reutilizable */}
       <View style={styles.textInvalidPass} />
       <View>
-        <Button title="Sign Up" enable={isEmpty()} onPress={SignUpTest} />
+        <Button title="Sign In" enable={isEmpty()} onPress={SignInTest} />
         <Text style={{textAlign: 'center'}}>or</Text>
         <Button
-          title="Sign Up with Google"
+          title="Sign In with Google"
           enable={true}
           onPress={onGoogleButtonPress}
         />
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-          <Text>You don't have an account? </Text>
+          <Text>Don't you have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
             <Text style={{color: 'blue'}}> Sign Up</Text>
           </TouchableOpacity>
