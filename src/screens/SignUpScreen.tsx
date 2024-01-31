@@ -12,6 +12,7 @@ import Button from '../components/Button';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
+
 const SignUp = ({navigation}: {navigation: any}) => {
   const [checkboxTerms, setCheckboxTerms] = useState(false);
   const [checkboxSubs, setCheckboxSubs] = useState(false);
@@ -160,6 +161,7 @@ const SignUp = ({navigation}: {navigation: any}) => {
           title="Sign Up with Google"
           enable={true}
           onPress={onGoogleButtonPress}
+          icon={'https://cdn.pixabay.com/photo/2015/12/11/11/43/google-1088004_1280.png'}
         />
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
           <Text>Already have an account?</Text>

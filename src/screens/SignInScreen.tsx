@@ -120,6 +120,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
           title="Sign Up with Google"
           enable={true}
           onPress={onGoogleButtonPress}
+          icon={'https://cdn.pixabay.com/photo/2015/12/11/11/43/google-1088004_1280.png'}
         />
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
           <Text>You don't have an account? </Text>
