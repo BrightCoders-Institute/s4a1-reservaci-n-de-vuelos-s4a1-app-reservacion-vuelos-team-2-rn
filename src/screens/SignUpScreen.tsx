@@ -42,17 +42,13 @@ const SignUp = ({navigation}: {navigation: any}) => {
   }, []);
 
   async function onGoogleButtonPress() {
-    // Check if your device supports Google Play
     await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
-    // Get the users ID token
     const {idToken} = await GoogleSignin.signIn();
     console.log(idToken);
     navigation.push('HomePage');
 
-    // Create a Google credential with the token
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
-    // Sign-in the user with the credential
     return auth().signInWithCredential(googleCredential);
   }
 
@@ -152,7 +148,6 @@ const SignUp = ({navigation}: {navigation: any}) => {
         textCheckbox={'Subscribe for select product updates.'}
       />
       {loading ? <ActivityIndicator size="large" color="0000ff" /> : false}
-      {/* Posible componente reutilizable */}
       <View>
         <Button title="Sign Up" enable={isEmpty()} onPress={SignUpTest} />
         <Text style={{textAlign: 'center'}}>or</Text>
