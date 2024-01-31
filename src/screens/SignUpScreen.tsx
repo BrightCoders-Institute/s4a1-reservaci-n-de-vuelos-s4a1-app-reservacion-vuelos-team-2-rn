@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -10,7 +10,7 @@ import InputField from '../components/InputField';
 import CheckBox from '../components/Checkbox';
 import Button from '../components/Button';
 import auth from '@react-native-firebase/auth';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import BtnGoogle from '../components/BtnGoogle';
 
 const SignUp = ({navigation}: {navigation: any}) => {
   const [checkboxTerms, setCheckboxTerms] = useState(false);
@@ -24,8 +24,7 @@ const SignUp = ({navigation}: {navigation: any}) => {
   const [passwordValid, setPasswordValid] = useState('');
   const [nameValid, setNameValid] = useState<string | boolean>('');
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordRegex =
-    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   const nameRegex = /^[a-zA-Z]+$/;
 
   const [loading, setLoading] = useState(false);
@@ -33,24 +32,6 @@ const SignUp = ({navigation}: {navigation: any}) => {
   const emailInvalid = (reason: string) => {
     setEmailValid(reason);
   };
-
-  useEffect(() => {
-    GoogleSignin.configure({
-      webClientId:
-        '644313173315-llsu6r28k9sq1fgv1h0801fc1tnmrp4v.apps.googleusercontent.com',
-    });
-  }, []);
-
-  async function onGoogleButtonPress() {
-    await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
-    const {idToken} = await GoogleSignin.signIn();
-    console.log(idToken);
-    navigation.push('HomePage');
-
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-    return auth().signInWithCredential(googleCredential);
-  }
 
   const passwordInvalid = () => {
     setPasswordValid('Incorrect email and/or password');
@@ -151,11 +132,7 @@ const SignUp = ({navigation}: {navigation: any}) => {
       <View>
         <Button title="Sign Up" enable={isEmpty()} onPress={SignUpTest} />
         <Text style={{textAlign: 'center'}}>or</Text>
-        <Button
-          title="Sign Up with Google"
-          enable={true}
-          onPress={onGoogleButtonPress}
-        />
+        <BtnGoogle navigation={navigation}/>
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
           <Text>Already have an account?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>

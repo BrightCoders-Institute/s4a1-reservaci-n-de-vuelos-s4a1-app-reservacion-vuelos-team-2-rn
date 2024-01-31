@@ -9,7 +9,7 @@ import {
 import InputField from '../components/InputField';
 import Button from '../components/Button';
 import auth from '@react-native-firebase/auth';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import BtnGoogle from '../components/BtnGoogle';
 
 const SignIn = ({navigation}: {navigation: any}) => {
   const [email, setEmail] = useState('');
@@ -34,23 +34,8 @@ const SignIn = ({navigation}: {navigation: any}) => {
   };
 
   useEffect(() => {
-    GoogleSignin.configure({
-      webClientId:
-        '644313173315-llsu6r28k9sq1fgv1h0801fc1tnmrp4v.apps.googleusercontent.com',
-    });
     clearErrors();
   }, []);
-
-  async function onGoogleButtonPress() {
-    await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
-    const {idToken} = await GoogleSignin.signIn();
-    console.log(idToken);
-    navigation.push('HomePage');
-
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-    return auth().signInWithCredential(googleCredential);
-  }
 
   const passwordInvalid = () => {
     setPasswordValid('Wrong password!');
@@ -111,11 +96,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
       <View>
         <Button title="Sign In" enable={isEmpty()} onPress={SignInTest} />
         <Text style={{textAlign: 'center'}}>or</Text>
-        <Button
-          title="Sign In with Google"
-          enable={true}
-          onPress={onGoogleButtonPress}
-        />
+        <BtnGoogle navigation={navigation}/>
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
           <Text>Don't you have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
