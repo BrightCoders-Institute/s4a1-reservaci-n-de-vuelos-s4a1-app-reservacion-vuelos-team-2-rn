@@ -1,6 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Button} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import auth from '@react-native-firebase/auth';
+import flightsData from '../db/myFlights.json';
+import FlightList from '../components/FlightList';
 
 const HomePageScreen = ({navigation}: {navigation: any}) => {
   // Set an initializing state whilst Firebase connects
@@ -46,10 +55,56 @@ const HomePageScreen = ({navigation}: {navigation: any}) => {
 
   return (
     <View>
-      <Text>Welcome {user.email}</Text>
-      <Button title="Log Out" onPress={handleLogOut} />
+      <Text style={styles.textTitle}>My flights</Text>
+
+      <FlightList />
+
+      {/* <View style={styles.vuelo}>
+        <View style={styles.despega}>
+          <Text>Beg</Text>
+          <Text>Serbia</Text>
+        </View>
+        
+        <Text>icon fly</Text>
+
+        <View style={styles.destino}></View>
+          <Text>Ams</Text>
+          <Text>Netherlands</Text>
+        </View>
+      </View>
+   
+      <Text>line gris</Text>
+
+      <View style={styles.infoVuelo}>
+        <Text>September 3, 2020</Text>
+        <Text>2 passengers</Text>
+      </View>
+      <Text>line negra</Text> */}
+
+      {/* <Text>Welcome {user.email}</Text>
+      <Button title="Log Out" onPress={handleLogOut} /> */}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  textTitle: {
+    color: '#5C6EF8',
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingBottom: 30,
+  },
+  vuelo: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  despega: {
+  },
+  destino: {
+  },
+  infoVuelo: {
+  },
+});
 
 export default HomePageScreen;

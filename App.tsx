@@ -19,7 +19,7 @@ const Stack = createNativeStackNavigator();
 function App(): React.JSX.Element {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="SignIn">
+      <Stack.Navigator initialRouteName="HomePage">
         <Stack.Screen name="SignUp">
           {props => <SignUp {...props} />}
         </Stack.Screen>
