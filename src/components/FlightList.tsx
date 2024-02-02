@@ -1,12 +1,16 @@
 import React from "react";
-import { FlatList, StyleSheet, View, TouchableOpacity, Text} from "react-native";
+import { FlatList, StyleSheet, View, TouchableOpacity, Text, GestureResponderEvent,} from "react-native";
 import FlightCard from './FlightCard';
 import { flights } from '../db/myFlights.json';
+interface FlighProps {
+  onPress?: (event: GestureResponderEvent) => void;
+}
 
-const FlightList = () => {
+const FlightList: React.FC<FlighProps> = ({ onPress }) =>{
   return (
     <View>
       <FlatList
+        ItemSeparatorComponent={Linea}
         style={styles.listStyle}
         data={flights}
         renderItem={({item}) => (
@@ -27,7 +31,7 @@ const FlightList = () => {
         justifyContent: 'center',
         margin: 0,
         padding: 0,
-      }}>
+      }} onPress={onPress}>
         <Text style={{
           fontSize: 60,
           textAlign: 'center',
@@ -39,6 +43,12 @@ const FlightList = () => {
           +
         </Text>
       </TouchableOpacity>
+    </View>
+  );
+};
+const Linea = () =>{
+  return (
+    <View style={{height: 1, width: '100%', backgroundColor: 'black'}}>
     </View>
   );
 };
