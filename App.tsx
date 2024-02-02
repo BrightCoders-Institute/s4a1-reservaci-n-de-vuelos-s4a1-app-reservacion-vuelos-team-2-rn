@@ -23,7 +23,7 @@ function App(): React.JSX.Element {
         <Stack.Screen name="SignUp">
           {props => <SignUp {...props} />}
         </Stack.Screen>
-        <Stack.Screen name="HomePage" component={HomePageScreen} />
+        <Stack.Screen name="HomePage" component={HomePageScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="SignIn" component={SignIn} />
       </Stack.Navigator>
     </NavigationContainer>

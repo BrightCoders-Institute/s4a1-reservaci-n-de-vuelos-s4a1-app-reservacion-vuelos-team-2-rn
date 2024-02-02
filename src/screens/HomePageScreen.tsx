@@ -42,47 +42,12 @@ const HomePageScreen = ({navigation}: {navigation: any}) => {
     );
   }
 
-  const logOff = () => {
-    auth()
-      .signOut()
-      .then(() => console.log('User signed out!'));
-  };
-
-  const handleLogOut = () => {
-    logOff();
-    navigation.navigate('SignUp');
-  };
-
   return (
-    <View>
+    <View style={{flex: 1}}>
       <Text style={styles.textTitle}>My flights</Text>
-
-      <FlightList />
-
-      {/* <View style={styles.vuelo}>
-        <View style={styles.despega}>
-          <Text>Beg</Text>
-          <Text>Serbia</Text>
-        </View>
-        
-        <Text>icon fly</Text>
-
-        <View style={styles.destino}></View>
-          <Text>Ams</Text>
-          <Text>Netherlands</Text>
-        </View>
+      <View style={{alignItems: 'center', flex: 1}}>
+        <FlightList />
       </View>
-   
-      <Text>line gris</Text>
-
-      <View style={styles.infoVuelo}>
-        <Text>September 3, 2020</Text>
-        <Text>2 passengers</Text>
-      </View>
-      <Text>line negra</Text> */}
-
-      {/* <Text>Welcome {user.email}</Text>
-      <Button title="Log Out" onPress={handleLogOut} /> */}
     </View>
   );
 };
@@ -90,20 +55,13 @@ const HomePageScreen = ({navigation}: {navigation: any}) => {
 const styles = StyleSheet.create({
   textTitle: {
     color: '#5C6EF8',
-    fontSize: 20,
+    fontSize: 25    ,
     fontWeight: 'bold',
-    paddingBottom: 30,
   },
   vuelo: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-  },
-  despega: {
-  },
-  destino: {
-  },
-  infoVuelo: {
   },
 });
 
