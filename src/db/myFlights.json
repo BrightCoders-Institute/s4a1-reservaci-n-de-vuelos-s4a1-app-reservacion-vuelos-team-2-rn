@@ -1,0 +1,85 @@
+{
+  "flights": [
+    {
+      "id" : 1,
+      "orgCountry": "Serbia",
+      "orgCity": "BEG",
+      "destCountry": "Netherlands",
+      "destCity": "AMS",
+      "date": "September 3, 2020",
+      "passengers": 2
+    },
+    {
+      "id" : 2,
+      "orgCountry": "Serbia",
+      "orgCity": "BEG",
+      "destCountry": "Netherlands",
+      "destCity": "AMS",
+      "date": "September 3, 2020",
+      "passengers": 2
+    },
+    {
+      "id" : 3,
+      "orgCountry": "Serbia",
+      "orgCity": "BEG",
+      "destCountry": "Netherlands",
+      "destCity": "AMS",
+      "date": "September 3, 2020",
+      "passengers": 2
+    },
+    {
+      "id" : 4,
+      "orgCountry": "Serbia",
+      "orgCity": "BEG",
+      "destCountry": "Netherlands",
+      "destCity": "AMS",
+      "date": "September 3, 2020",
+      "passengers": 2
+    },
+    {
+      "id" : 5,
+      "orgCountry": "Serbia",
+      "orgCity": "BEG",
+      "destCountry": "Netherlands",
+      "destCity": "AMS",
+      "date": "September 3, 2020",
+      "passengers": 2
+    },
+    {
+      "id" : 6,
+      "orgCountry": "Serbia",
+      "orgCity": "BEG",
+      "destCountry": "Netherlands",
+      "destCity": "AMS",
+      "date": "September 3, 2020",
+      "passengers": 2
+    },
+    {
+      "id" : 7,
+      "orgCountry": "Serbia",
+      "orgCity": "BEG",
+      "destCountry": "Netherlands",
+      "destCity": "AMS",
+      "date": "September 3, 2020",
+      "passengers": 2
+    },
+    {
+      "id" : 8,
+      "orgCountry": "Serbia",
+      "orgCity": "BEG",
+      "destCountry": "Netherlands",
+      "destCity": "AMS",
+      "date": "September 3, 2020",
+      "passengers": 2
+    },
+    {
+      "id" : 9,
+      "orgCountry": "Serbia",
+      "orgCity": "BEG",
+      "destCountry": "Netherlands",
+      "destCity": "AMS",
+      "date": "September 3, 2020",
+      "passengers": 2
+    }
+  ]
+}

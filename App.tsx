@@ -19,11 +19,11 @@ const Stack = createNativeStackNavigator();
 function App(): React.JSX.Element {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="SignIn">
+      <Stack.Navigator initialRouteName="HomePage">
         <Stack.Screen name="SignUp">
           {props => <SignUp {...props} />}
         </Stack.Screen>
-        <Stack.Screen name="HomePage" component={HomePageScreen} />
+        <Stack.Screen name="HomePage" component={HomePageScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="SignIn" component={SignIn} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,6 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Button} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import auth from '@react-native-firebase/auth';
+import flightsData from '../db/myFlights.json';
+import FlightList from '../components/FlightList';
 
 const HomePageScreen = ({navigation}: {navigation: any}) => {
   // Set an initializing state whilst Firebase connects
@@ -33,23 +42,27 @@ const HomePageScreen = ({navigation}: {navigation: any}) => {
     );
   }
 
-  const logOff = () => {
-    auth()
-      .signOut()
-      .then(() => console.log('User signed out!'));
-  };
-
-  const handleLogOut = () => {
-    logOff();
-    navigation.navigate('SignUp');
-  };
-
   return (
-    <View>
-      <Text>Welcome {user.email}</Text>
-      <Button title="Log Out" onPress={handleLogOut} />
+    <View style={{flex: 1}}>
+      <Text style={styles.textTitle}>My flights</Text>
+      <View style={{alignItems: 'center', flex: 1}}>
+        <FlightList />
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  textTitle: {
+    color: '#5C6EF8',
+    fontSize: 25    ,
+    fontWeight: 'bold',
+  },
+  vuelo: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+});
 
 export default HomePageScreen;
