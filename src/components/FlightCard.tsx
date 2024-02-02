@@ -31,7 +31,7 @@ const FlightCard = ({fly}: {fly: FlyProp}) => {
         <View style={styles.rowgray}/>
           <View style={styles.fly}>
           <Text style={styles.detailsFly}>{date}</Text>
-          <Text style={styles.detailsFly}>{passengers} passengers</Text>
+          <Text style={styles.detailsFly}>{passengers != 0 ? passengers+" passenger": ""}</Text>
         </View>
       </View>
     );
@@ -40,8 +40,6 @@ const FlightCard = ({fly}: {fly: FlyProp}) => {
   const styles = StyleSheet.create({
     card: {
       paddingVertical: 20,
-      borderBottomWidth: 1,
-      borderBottomColor: 'black',
     },
     fly: {
       display: 'flex',

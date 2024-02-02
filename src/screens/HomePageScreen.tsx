@@ -41,12 +41,11 @@ const HomePageScreen = ({navigation}: {navigation: any}) => {
       </View>
     );
   }
-
   return (
     <View style={{flex: 1}}>
       <Text style={styles.textTitle}>My flights</Text>
       <View style={{alignItems: 'center', flex: 1}}>
-        <FlightList />
+        <FlightList onPress={() => navigation.navigate('FromScreen')} />
       </View>
     </View>
   );
