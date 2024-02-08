@@ -3,7 +3,7 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import Button from './Button';
 import auth from '@react-native-firebase/auth';
 
-const BtnGoogle = ({navigation}: {navigation: any}) => {
+const BtnGoogle = ({navigation, title}: {navigation: any, title: string}) => {
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -22,7 +22,7 @@ const BtnGoogle = ({navigation}: {navigation: any}) => {
 
   return (
     <Button
-      title="Sign Up with Google"
+      title={`${title} with Google`}
       enable={true}
       onPress={onGoogleButtonPress}
       icon={'https://cdn.pixabay.com/photo/2015/12/11/11/43/google-1088004_1280.png'}

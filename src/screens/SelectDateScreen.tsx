@@ -3,21 +3,31 @@ import { StyleSheet, View, TouchableOpacity, Text, Image, TextInput} from "react
 import Button from '../components/Button';
 import FlightCard from "../components/FlightCard";
 import {Calendar} from 'react-native-calendars';
+import { format } from 'date-fns';
 
-const SelectDateScreen = ({navigation}: {navigation: any}) => {
+const SelectDateScreen = ({navigation, route}: {navigation: any, route: any}) => {
+    const {destination, fromDestination} = route.params
     const [selected, setSelected] = useState("");
+
+    const getFormattedDate = (dateString: string) => {
+      const date = new Date(dateString);
+      return format(date, 'MMMM dd, yyyy');
+  };
 
     return (
         <View style={styles.containericon}>
-            <TouchableOpacity onPress={() => navigation.navigate('ToScreen')}>
+            <TouchableOpacity onPress={() => navigation.navigate('ToScreen', {
+                    destination: destination,
+                    fromDestination: fromDestination
+                })}>
                 <Image source={require('../icons/atras.png')} style={styles.iconStyle}/>
             </TouchableOpacity>
             <FlightCard fly={  
-                {orgCountry: "Serbia",
+                {orgCountry: fromDestination,
                 orgCity: "BEG",
-                destCountry: "Netherlands",
+                destCountry: destination,
                 destCity: "AMS",
-                date: selected,
+                date: selected ? getFormattedDate(selected) : "",
                 passengers: 0,}
                 }/>
             <Text style={styles.text}>Select date</Text>
@@ -32,9 +42,20 @@ const SelectDateScreen = ({navigation}: {navigation: any}) => {
                     selectedColor: '#5f6def',
                     },
                 }}
+
                 />
             <View style={styles.buttonContainer}>
-              <Button  title="Next" enable={true} onPress={() => navigation.navigate('PassengerScreen')} />
+              <Button 
+                title="Next"
+                enable={selected == '' ? false : true }
+                onPress={
+                  () => navigation.navigate('PassengerScreen', {
+                    date: selected ? getFormattedDate(selected) : "",
+                    destination: destination,
+                    fromDestination: fromDestination
+                  })
+                }
+              />
             </View>
         </View>
       );

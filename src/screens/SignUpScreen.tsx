@@ -132,7 +132,7 @@ const SignUp = ({navigation}: {navigation: any}) => {
       <View>
         <Button title="Sign Up" enable={isEmpty()} onPress={SignUpTest} />
         <Text style={{textAlign: 'center'}}>or</Text>
-        <BtnGoogle navigation={navigation}/>
+        <BtnGoogle navigation={navigation} title="Sign Up" />
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
           <Text>Already have an account?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>

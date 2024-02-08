@@ -11,7 +11,7 @@ import auth from '@react-native-firebase/auth';
 import flightsData from '../db/myFlights.json';
 import FlightList from '../components/FlightList';
 
-const HomePageScreen = ({navigation}: {navigation: any}) => {
+const HomePageScreen = ({navigation, }: {navigation: any}) => {
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();

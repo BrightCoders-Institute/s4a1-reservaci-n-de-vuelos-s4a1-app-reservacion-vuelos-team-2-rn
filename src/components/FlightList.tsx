@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { FlatList, StyleSheet, View, TouchableOpacity, Text, GestureResponderEvent,} from "react-native";
 import FlightCard from './FlightCard';
 import { flights } from '../db/myFlights.json';

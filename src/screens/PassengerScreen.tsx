@@ -6,50 +6,67 @@ import WheelPicker from "react-native-wheely";
 import Icon from 'react-native-vector-icons/AntDesign';
 
 
-const PassengerScreen = ({navigation}: {navigation: any}) => {
-    const [selected, setSelected] = useState("");
-    const [selectedIndex, setSelectedIndex] = useState(0);
+const PassengerScreen = ({navigation, route}: {navigation: any, route: any}) => {
+  const {destination, fromDestination, date} = route.params
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
     return (
         <View style={styles.containericon}>
-            <TouchableOpacity onPress={() => navigation.navigate('SelectDateScreen')}>
-                <Image source={require('../icons/atras.png')} style={styles.iconStyle}/>
-            </TouchableOpacity>
-            <FlightCard fly={  
-                {orgCountry: "Serbia",
-                orgCity: "BEG",
-                destCountry: "Netherlands",
-                destCity: "AMS",
-                date: selected,
-                passengers: selectedIndex,}
-                }/>
-            <Text style={styles.text}>How many passengers?</Text>
-            <View>
-                <Icon
-                    style={styles.caretleft}
-                    name="caretleft"
-                    size={20}
-                    color="rgb(92, 110, 248)"
-                />
-                <Icon
-                    style={styles.caretright}
-                    name="caretright"
-                    size={20}
-                    color="rgb(92, 110, 248)"
-                />
-                <WheelPicker
-                    selectedIndex={selectedIndex}
-                    options={['---','1', '2', '3', '4', '5', '6', '7', '8', '9']}
-                    onChange={index => setSelectedIndex(index)}
-                    itemStyle={styles.wheelPicker}
-                    itemTextStyle={styles.wheelPickerText}
-                    containerStyle={styles.wheelPickerContainer}
-                    selectedIndicatorStyle={styles.selectedIndicator}
-                />
-            </View>
-            <View style={styles.buttonContainer}>
-              <Button  title="Next" enable={true} onPress={() => navigation.navigate('ResultsScreen')} />
-            </View>
+          <TouchableOpacity onPress={() => navigation.navigate('SelectDateScreen', {
+               date: date,
+               destination: destination,
+               fromDestination: route.params.fromDestination
+             })}>
+              <Image source={require('../icons/atras.png')} style={styles.iconStyle}/>
+          </TouchableOpacity>
+          <FlightCard fly={  
+            {
+              orgCountry: fromDestination,
+              orgCity: "BEG",
+              destCountry: destination,
+              destCity: "AMS",
+              date: date,
+              passengers: selectedIndex
+            }
+          }/>
+          <Text style={styles.text}>How many passengers?</Text>
+          <View>
+            <Icon
+              style={styles.caretleft}
+              name="caretleft"
+              size={20}
+              color="rgb(92, 110, 248)"
+            />
+            <Icon
+              style={styles.caretright}
+              name="caretright"
+              size={20}
+              color="rgb(92, 110, 248)"
+            />
+            <WheelPicker
+              selectedIndex={selectedIndex}
+              options={['---','1', '2', '3', '4', '5', '6', '7', '8', '9']}
+              onChange={index => setSelectedIndex(index)}
+              itemStyle={styles.wheelPicker}
+              itemTextStyle={styles.wheelPickerText}
+              containerStyle={styles.wheelPickerContainer}
+              selectedIndicatorStyle={styles.selectedIndicator}
+            />
+          </View>
+          <View style={styles.buttonContainer}>
+            <Button
+              title="Next"
+              enable={selectedIndex == 0 ? false : true }
+              onPress={
+                () => navigation.navigate('ResultsScreen', {
+                  date: date,
+                  destination: destination,
+                  fromDestination: fromDestination,
+                  numPassagers: selectedIndex
+                })
+              }
+            />
+          </View>
         </View>
       );
 };
