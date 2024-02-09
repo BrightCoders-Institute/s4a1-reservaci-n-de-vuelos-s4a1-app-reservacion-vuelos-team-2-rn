@@ -1,14 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, StyleSheet, Button} from 'react-native';
 import auth from '@react-native-firebase/auth';
-import flightsData from '../db/myFlights.json';
 import FlightList from '../components/FlightList';
 
 const HomePageScreen = ({navigation}: {navigation: any}) => {
@@ -54,7 +46,7 @@ const HomePageScreen = ({navigation}: {navigation: any}) => {
 const styles = StyleSheet.create({
   textTitle: {
     color: '#5C6EF8',
-    fontSize: 25    ,
+    fontSize: 25,
     fontWeight: 'bold',
   },
   vuelo: {

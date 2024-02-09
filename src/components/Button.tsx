@@ -4,7 +4,7 @@ import {
   Text,
   StyleSheet,
   GestureResponderEvent,
-  Image
+  Image,
 } from 'react-native';
 
 interface ButtonProps {
@@ -21,7 +21,7 @@ const Button: React.FC<ButtonProps> = ({title, enable, onPress, icon}) => {
 
   return (
     <TouchableOpacity style={style.button} onPress={onPress} disabled={!enable}>
-       {icon && <Image source={{uri: icon}} style={styles.icon} />}
+      {icon && <Image source={{uri: icon}} style={styles.icon} />}
       <Text style={style.text}>{title}</Text>
     </TouchableOpacity>
   );
@@ -33,11 +33,11 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 5,
     alignItems: 'center',
-    flexDirection: 'row', 
-    justifyContent: 'center', 
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   buttonWithIcon: {
-    paddingLeft: 15, 
+    paddingLeft: 15,
   },
   text: {
     color: '#fff',
@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   icon: {
-    width: 25, 
-    height: 25, 
+    width: 25,
+    height: 25,
   },
   button__disabled: {
     backgroundColor: 'gray',
