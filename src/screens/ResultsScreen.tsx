@@ -1,20 +1,26 @@
-import React, {useState, useEffect} from "react";
-import { StyleSheet, View, TouchableOpacity, Text, Image, TextInput} from "react-native";
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, View, Text} from 'react-native';
 import Button from '../components/Button';
-import FlightCard from "../components/FlightCard";
+import FlightCard from '../components/FlightCard';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
-const ResultsScreen = ({navigation, route}: {navigation: any, route: any}) => {
-  const {destination, fromDestination, date, numPassagers} = route.params
-  const [selected, setSelected] = useState("");
+const ResultsScreen = ({navigation, route}: {navigation: any; route: any}) => {
+  const {
+    fromDestCity,
+    fromDestCountry,
+    destCity,
+    destCountry,
+    date,
+    numPassagers,
+  } = route.params;
   const [userId, setUserId] = useState<string | null>(null);
 
   const flightData = {
-    orgCountry: fromDestination,
-    orgCity: "BEG",
-    destCountry: destination,
-    destCity: "AMS",
+    orgCountry: fromDestCountry,
+    orgCity: fromDestCity,
+    destCountry: destCountry,
+    destCity: destCity,
     date: date,
     passengers: numPassagers,
   };
@@ -22,9 +28,9 @@ const ResultsScreen = ({navigation, route}: {navigation: any, route: any}) => {
   useEffect(() => {
     const user = auth().currentUser;
     if (user !== null) {
-      setUserId(user.uid); 
+      setUserId(user.uid);
     }
-  }, []); 
+  }, []);
 
   const sendFlightDataToFirestore = async () => {
     if (userId) {
@@ -36,7 +42,7 @@ const ResultsScreen = ({navigation, route}: {navigation: any, route: any}) => {
           .add(flightData);
         console.log('Reservacion guardada!');
       } catch (error) {
-        console.error("Error a;adiendo el documento: ", error);
+        console.error('Error a;adiendo el documento: ', error);
       }
     } else {
       console.log('ID usuario encontrado, no esta logeado!');
@@ -45,38 +51,39 @@ const ResultsScreen = ({navigation, route}: {navigation: any, route: any}) => {
 
   return (
     <View style={styles.containericon}>
-      <FlightCard fly={  
-        flightData
-      }/>
-      <Text style={styles.text}>Your request     was received.</Text>
+      <FlightCard fly={flightData} />
+      <Text style={styles.text}>Your request was received.</Text>
       <View style={styles.buttonContainer}>
-        <Button  title="Next" enable={true} onPress={() => {
-          sendFlightDataToFirestore();
-          navigation.navigate('HomePage');
-        }} />
+        <Button
+          title="Next"
+          enable={true}
+          onPress={() => {
+            sendFlightDataToFirestore();
+            navigation.navigate('HomePage');
+          }}
+        />
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-    containericon: {
-        flex: 1,
-        margin: 22,
-        paddingVertical: '50%',
-    },
-    text: {
-        fontSize: 40,
-        color: 'black',
-        fontWeight: 'bold',
-        paddingTop: 30,
-    },
-    buttonContainer: {
-        flex: 1,
-        justifyContent: 'flex-end', // Esto empuja el botón hacia el final del contenedor
-        marginBottom: -177, 
-        
-    }
+  containericon: {
+    flex: 1,
+    margin: 22,
+    paddingVertical: '50%',
+  },
+  text: {
+    fontSize: 40,
+    color: 'black',
+    fontWeight: 'bold',
+    paddingTop: 30,
+  },
+  buttonContainer: {
+    flex: 1,
+    justifyContent: 'flex-end', // Esto empuja el botón hacia el final del contenedor
+    marginBottom: -177,
+  },
 });
 
 export default ResultsScreen;

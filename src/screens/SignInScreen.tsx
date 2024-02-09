@@ -96,7 +96,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
       <View>
         <Button title="Sign In" enable={isEmpty()} onPress={SignInTest} />
         <Text style={{textAlign: 'center'}}>or</Text>
-        <BtnGoogle navigation={navigation} title='Sign In' />
+        <BtnGoogle navigation={navigation} title="Sign In" />
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
           <Text>Don't you have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>

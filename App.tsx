@@ -18,14 +18,15 @@ import ToScreen from './src/screens/ToScreen';
 import SelectDateScreen from './src/screens/SelectDateScreen';
 import PassengerScreen from './src/screens/PassengerScreen';
 import ResultsScreen from './src/screens/ResultsScreen';
-import FormLayout from './src/screens/FormLayout';
 
 const Stack = createNativeStackNavigator();
 
 function App(): React.JSX.Element {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="HomePage" screenOptions={{headerShown: false}}>
+      <Stack.Navigator
+        initialRouteName="HomePage"
+        screenOptions={{headerShown: false}}>
         <Stack.Screen name="SignUp">
           {props => <SignUp {...props} />}
         </Stack.Screen>
@@ -43,7 +44,11 @@ function App(): React.JSX.Element {
         <Stack.Screen name="PassengerScreen">
           {props => <PassengerScreen {...props} />}
         </Stack.Screen>
-        <Stack.Screen name="ResultsScreen" component={ResultsScreen} options={{ headerShown: false }}/>
+        <Stack.Screen
+          name="ResultsScreen"
+          component={ResultsScreen}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
