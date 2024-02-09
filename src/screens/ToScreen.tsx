@@ -1,11 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Text,
-  Image,
-} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Text, Image} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
 import Button from '../components/Button';
 import FlightCard from '../components/FlightCard';
