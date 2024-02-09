@@ -90,7 +90,7 @@ const SignUp = ({navigation}: {navigation: any}) => {
         const user = userCredential.user;
       })
       .then((userCredential) => {
-        navigation.push('HomePage');
+        navigation.push('SignIn');
       })
       .catch(error => {
         console.log(error);

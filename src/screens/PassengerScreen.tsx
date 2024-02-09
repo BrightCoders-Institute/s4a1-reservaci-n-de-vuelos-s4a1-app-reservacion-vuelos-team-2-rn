@@ -59,7 +59,7 @@ const PassengerScreen = ({
       <FlightCard
         fly={{
           orgCountry: fromDestCountry,
-          orgCity: destCountry,
+          orgCity: fromDestCity,
           destCountry: destCountry,
           destCity: destCity,
           date: date,
